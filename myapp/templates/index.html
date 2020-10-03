@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam Classifier</title>
+    <style>
+        .button {
+  background-color: #dd5145; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin-left:35%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+textarea {
+  width: 80%;
+  margin:10% 10%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid lightgrey;
+  border-radius: 4px;
+  //background-color: #f8f8f8;
+  resize: none;
+  font-size:20px;
+}
+    </style>
+</head>
+<body>
+
+    <h1 style="color:blue"><center><u>SMS Spam Classifier</u></center></h1>
+<div id="main" style="min-height:370px;width:400px;margin:auto;background-color:lightgrey;margin-top:5px">
+    <form method="POST" action="checksms">
+        {% csrf_token %}
+        <textarea placeholder="Enter your sms here..." name="smstext"></textarea>
+        <input type="submit" class="button" value="Check"/>
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+        <h2 style="margin-left:28%;margin-top:10%;color:brown">{{message}}</h2>
+    {% else %}
+        <h2 style="margin-left:28%;margin-top:10%;color:green">{{message}}</h2>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+<div id="footer" style="height:150px;width:400px;margin:auto;background-color:grey;font-family:'Lobster', cursive;">
+
+    <h3 style="color:brow"><b>Our Team</b></h3>
+            <ul class="footer-links">
+                <li style="color:white">Vijay Kumar Saroj - 18259</li>
+              <li style="color:white">Vinod Kumar - 18260</li>
+              <li style="color:white">Vivek Verma - 18261</li>
+              <li style="color:white">Yateesh Kumar Gautam - 18262</li>
+            </ul>
+</div>
+</body>
+</html>
