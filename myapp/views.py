@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 import pandas as pd
@@ -8,12 +8,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report
 
+
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    return render(request, 'index.html')
+
 
 def checksms(request):
-    sms=request.POST.get('smstext','Guest')
+    sms = request.POST.get('smstext', 'Guest')
     value = sms
 
     df = pd.read_csv('spam.csv', encoding="latin-1")
@@ -32,10 +34,10 @@ def checksms(request):
     data = [message]
     vect = cv.transform(data).toarray()
     res = clf.predict(vect)
-    if res == 1:  #Ham
-        #return HttpResponse('spam')
-        messages.success(request,'This sms is spam')
-    else:            #Spam
-        #return HttpResponse('ham')
-        messages.warning(request,'This sms is ham')
+    if res == 1:  # Ham
+        # return HttpResponse('spam')
+        messages.success(request, 'This sms is spam')
+    else:  # Spam
+        # return HttpResponse('ham')
+        messages.warning(request, 'This sms is ham')
     return redirect('index')
